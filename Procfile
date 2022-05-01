@@ -1,1 +1,1 @@
-web: gunicorn cipp4-eryk.wsgi
+web: gunicorn cipp4-eryk.wsgi:application
