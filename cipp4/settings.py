@@ -31,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cipp4-eryk.herokuapp.com', 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
