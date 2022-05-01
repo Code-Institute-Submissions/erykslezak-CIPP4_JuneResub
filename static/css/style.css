@@ -9,3 +9,67 @@
 .nav>li{
     text-align: center;
 }
+
+.card{
+    border: solid 1px #343536;
+    background-color: #1A1A1B;
+    margin-bottom: 10px;
+    max-height: 300px;
+}
+
+.col-sm-1{
+    background-color: #141415;
+}
+
+.top-card{
+    margin-top: 10px;
+    margin-left: 6px;
+    color: #646566
+}
+
+.card-title{
+    color: #D7DADC
+}
+
+.card-content{
+    color: #CBCEC0;
+    max-height: 150px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.votes{
+    background-color: #141415;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.votes p{
+    color: #D7DADC;
+    text-align: center;
+}
+
+.btn-downvote, .btn-upvote {
+    text-align: center;
+    color: #D7DADC;
+    border: none;
+    background: transparent;
+}
+
+/*.btn-upvote:hover,
+.btn-upvote:active {
+    color: #E84610;
+    border: none;
+} */
+
+body {
+    background-color: #030303;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.card:hover {
+    border: solid 1px #D7DADC;
+}

@@ -2,4 +2,37 @@
 
 {% block content %}
 
-{% endblock %}
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            {% for post in post_list %}
+            <div class="row card">
+                <div class="votes col-sm-1">
+                    <p>
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-upvote"><i class="fas fa-arrow-up"></i></button>
+                        0
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-downvote"><i class="fas fa-arrow-down"></i></button>
+                    </p>
+                </div>
+                <div class="col-sm-11">
+                    <div class="image-container">
+                        <div class="top-card">
+                            <p class="author">Posted by {{ post.author }} {{ post.created_on}}</p>
+                        </div>
+                    </div>
+                    <a href="#" class="post-link">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-content">{{ post.content }}</p>
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-comments"><i class="fas fa-message"></i></button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <p>test2</p>
+        </div>
+    </div>
+</div>
+{%endblock%}
