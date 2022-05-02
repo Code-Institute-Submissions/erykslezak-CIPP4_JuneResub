@@ -27,11 +27,10 @@
     border: solid 1px #343536;
 }
 
-.card{
+.card, .post-card {
     border: solid 1px #343536;
     background-color: #1A1A1B;
     margin-bottom: 10px;
-    max-height: 300px;
 }
 
 .top-card{
@@ -40,7 +39,7 @@
     color: #646566
 }
 
-a{
+a, p, h3{
     color: #D7DADC
 }
 
@@ -53,7 +52,6 @@ a:hover {
 
 .card-content{
     color: #CBCEC0;
-    max-height: 150px;
     overflow: hidden;
     margin-bottom: 15px;
 }

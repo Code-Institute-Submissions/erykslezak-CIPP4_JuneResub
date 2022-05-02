@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <div class="row post-card">
+                <div class="votes col-sm-1">
+                    <p>
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-upvote"><i
+                                class="fas fa-arrow-up"></i></button>
+                        0
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-downvote"><i
+                                class="fas fa-arrow-down"></i></button>
+                    </p>
+                </div>
+                <div class="col-sm-11">
+                    <div class="image-container">
+                        <div class="top-card">
+                            <p class="author">Posted by {{ post.author }} {{ post.created_on}}</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-content">{{ post.content | safe }}}</p>
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-comments"><i
+                                class="fas fa-message"></i></button>
+                    </a>
+                    <div>
+                        {% if commented %}
+                        <div class="alert alert-success" role="alert">
+                            Your comment is awaiting approval
+                        </div>
+                        {% else %}
+                        {% if user.is_authenticated %}
+                        <p>Comment as: {{ user.username }}</p>
+                        <form method="post" style="margin-top: 1.3em;">
+                            {{ comment_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-signup btn-lg">Comment</button>
+                        </form>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    <h3>Comments:</h3>
+                    <div>
+                        {% for comment in comments %}
+                        <div class="comments" style="padding: 10px; word-break: break-all;">
+                            <p class="font-weight-bold">
+                                {{ comment.name }}
+                                <span class=" text-muted font-weight-normal">
+                                    {{ comment.created_on }}
+                                </span> wrote:
+                            </p>
+                            {{ comment.body | linebreaks }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p>test2</p>
+        </div>
+    </div>
+</div>
+{%endblock%}
