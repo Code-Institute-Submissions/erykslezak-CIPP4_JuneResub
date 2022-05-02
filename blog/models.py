@@ -14,6 +14,8 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    upvotes = models.ManyToManyField(User, related_name='post_upvotes')
+    downvotes = models.ManyToManyField(User, related_name='post_downvotes')
     votes = models.ManyToManyField(User, related_name='post_votes')
 
     class Meta:
@@ -26,7 +28,10 @@ class Post(models.Model):
         return reverse('home')
 
     def total_votes(self):
-        return self.votes.count()
+        total_upvotes = self.upvotes.count()
+        total_downvotes = self.downvotes.count()
+        total_votes = total_upvotes - total_downvotes
+        return total_votes
 
 
 class Comment(models.Model):
