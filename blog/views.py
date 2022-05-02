@@ -1,13 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Tags
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import CommentForm, AddPostForm
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 
 def TagsView(request, tags):
     tag_posts = Post.objects.filter(post_tag=tags.replace('-', ' '))
     return render(request, 'tags.html', {'tags': tags.title().replace('-', ' '), 'tag_posts': tag_posts})
+
+
+def UpvoteView(request, slug):
+    post = get_object_or_404(Post, id=request.POST.get('post_id_upvote'))
+    post.votes.add(request.user)
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 class PostList(ListView):
     model = Post

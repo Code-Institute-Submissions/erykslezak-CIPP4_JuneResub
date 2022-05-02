@@ -14,6 +14,7 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    votes = models.ManyToManyField(User, related_name='post_votes')
 
     class Meta:
         ordering = ['-created_on']
@@ -23,6 +24,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
+
+    def total_votes(self):
+        return self.votes.count()
 
 
 class Comment(models.Model):
