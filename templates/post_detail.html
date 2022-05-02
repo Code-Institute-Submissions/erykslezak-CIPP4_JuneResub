@@ -45,7 +45,13 @@
                         {% endif %}
                         {% endif %}
                     </div>
-                    <h3>Comments:</h3>
+                    <h3>
+                        {% with comments.count as total_comments %}
+                        <strong class="text-secondary"><i class="far fa-comments"></i>
+                            <!-- Our total_comments variable goes before the closing strong tag -->
+                            {{ total_comments }}</strong>
+                        {% endwith %}
+                        Comments:</h3>
                     <div>
                         {% for comment in comments %}
                         <div class="comments" style="padding: 10px; word-break: break-all;">
