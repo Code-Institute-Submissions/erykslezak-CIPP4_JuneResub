@@ -4,6 +4,11 @@ from django.urls import reverse_lazy
 from .forms import CommentForm, AddPostForm
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+
+def TagsView(request, tags):
+    tag_posts = Post.objects.filter(post_tag=tags.replace('-', ' '))
+    return render(request, 'tags.html', {'tags': tags.title().replace('-', ' '), 'tag_posts': tag_posts})
+
 class PostList(ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -16,14 +21,13 @@ class UserPostList(ListView):
     template_name = 'user_posts.html'
 
 
-
 class PostDetail(DetailView):
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
-        
+
         return render(
             request,
             "post_detail.html",

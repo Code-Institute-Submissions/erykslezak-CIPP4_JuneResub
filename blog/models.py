@@ -6,9 +6,9 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 class Post(models.Model):
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    post_tag = models.CharField(max_length=70, unique=True, default="Uncategorized")
+    post_tag = models.CharField(max_length=70, default="Uncategorized")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()

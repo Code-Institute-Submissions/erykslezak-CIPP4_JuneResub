@@ -24,7 +24,7 @@
                 <div class="col-sm-11">
                     <div class="image-container">
                         <div class="top-card">
-                            <p class="author">Posted by {{ post.author }} {{ post.created_on}}</p>
+                            <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> - Posted by {{ post.author }} {{ post.created_on}}</p>
                         </div>
                     </div>
                     <a href="{% url 'post_detail' post.slug %}" class="post-link">
