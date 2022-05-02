@@ -13,16 +13,26 @@ def TagsView(request, tags):
 
 def UpvoteView(request, slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id_upvote'))
-    post.upvotes.add(request.user)
-    post.downvotes.remove(request.user)
+    if post.downvotes.filter(id=request.user.id).exists():
+        post.upvotes.add(request.user)
+        post.downvotes.remove(request.user)
+    elif post.upvotes.filter(id=request.user.id).exists():
+        post.upvotes.remove(request.user)
+    else:
+        post.upvotes.add(request.user)
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 def DownvoteView(request, slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id_downvote'))
-    post.upvotes.remove(request.user)
-    post.downvotes.add(request.user)
+    if post.upvotes.filter(id=request.user.id).exists():
+        post.downvotes.add(request.user)
+        post.upvotes.remove(request.user)
+    elif post.downvotes.filter(id=request.user.id).exists():
+        post.downvotes.remove(request.user)
+    else:
+        post.downvotes.add(request.user)
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
