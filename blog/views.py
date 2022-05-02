@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Tags
 from django.urls import reverse_lazy
 from .forms import CommentForm, AddPostForm
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
@@ -13,6 +13,12 @@ class PostList(ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        tag_menu = Tags.objects.all()
+        tags = super(PostList, self).get_context_data(*args, **kwargs)
+        tags["tag_menu"] = tag_menu
+        return tags
 
 
 class UserPostList(ListView):
