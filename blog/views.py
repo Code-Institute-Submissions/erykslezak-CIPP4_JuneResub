@@ -14,12 +14,16 @@ def TagsView(request, tags):
 def UpvoteView(request, slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id_upvote'))
     post.upvotes.add(request.user)
+    post.downvotes.remove(request.user)
+
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 def DownvoteView(request, slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id_downvote'))
+    post.upvotes.remove(request.user)
     post.downvotes.add(request.user)
+
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
