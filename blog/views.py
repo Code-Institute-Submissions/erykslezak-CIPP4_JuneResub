@@ -1,16 +1,15 @@
 from django.shortcuts import render, get_object_or_404
-from django.views import generic, View
 from .models import Post
 from .forms import CommentForm
+from django.views.generic import CreateView, ListView, DetailView
 
-
-class PostList(generic.ListView):
+class PostList(ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
 
 
-class PostDetail(View):
+class PostDetail(DetailView):
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
@@ -27,3 +26,9 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+
+class AddPost(CreateView):
+    model = Post
+    template_name = 'add_post.html'
+    fields = '__all__'

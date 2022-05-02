@@ -2,15 +2,17 @@
     text-align:center;
 }
 
-#search:active {
+/* #search:active {
     border: solid 1px #D7DADC;
-}
+} */
+
 .form-control{
     background-color: #272729;
     border: solid 1px #343536;
 }
 
-.form-control:hover{
+.form-control:hover,
+.form-group:visited {
     border: solid 1px #D7DADC;
 }
 
@@ -27,11 +29,16 @@
     border: solid 1px #343536;
 }
 
-.card, .post-card {
+.card, .post-card, .side-card {
     border: solid 1px #343536;
     background-color: #1A1A1B;
     margin-bottom: 10px;
-    margin-right: 1px;
+}
+
+.side-card {
+    margin-left: 5px;
+    padding: 0 5px;
+    color: #D7DADC;
 }
 
 .top-card{
