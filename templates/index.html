@@ -30,11 +30,17 @@
 <div class="row card" style="max-height: 300px;">
     <div class="votes col-sm-1">
         <p>
-            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-upvote"><i
+            <form action="{% url 'upvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
                     class="fas fa-arrow-up"></i></button>
-            0
-            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-downvote"><i
+            </form>
+            <p>{{ post.total_votes }}</p>
+            <form action="{% url 'downvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
                     class="fas fa-arrow-down"></i></button>
+            </form>
         </p>
         {% if user.is_authenticated and user == post.author %}
         <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
