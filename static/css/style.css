@@ -2,12 +2,29 @@
     text-align:center;
 }
 
+#search:active {
+    border: solid 1px #D7DADC;
+}
+.form-control{
+    background-color: #272729;
+    border: solid 1px #343536;
+}
+
+.form-control:hover{
+    border: solid 1px #D7DADC;
+}
+
 .btn-margin{
     margin: 8px;
 }
 
 .nav>li{
     text-align: center;
+}
+
+#navbar {
+    background-color: #1A1A1B;
+    border: solid 1px #343536;
 }
 
 .card{
@@ -17,16 +34,19 @@
     max-height: 300px;
 }
 
-.col-sm-1{
-    background-color: #141415;
-}
-
 .top-card{
     margin-top: 10px;
     margin-left: 6px;
     color: #646566
 }
 
+a{
+    color: #D7DADC
+}
+
+a:hover {
+    color: #D7DADC
+}
 .card-title{
     color: #D7DADC
 }
@@ -39,8 +59,6 @@
 }
 
 .votes{
-    background-color: #141415;
-    height: 100%;
     padding-top: 20px;
 }
 
