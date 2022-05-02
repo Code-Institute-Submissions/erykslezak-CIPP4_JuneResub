@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
-from .forms import CommentForm
-from django.views.generic import CreateView, ListView, DetailView
+from .forms import CommentForm, AddPostForm
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 class PostList(ListView):
     model = Post
@@ -31,4 +31,14 @@ class PostDetail(DetailView):
 class AddPost(CreateView):
     model = Post
     template_name = 'add_post.html'
-    fields = '__all__'
+    form_class = AddPostForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(CreateView, self).form_valid(form)
+
+
+class EditPost(UpdateView):
+    model = Post
+    template_name = 'edit_post.html'
+    fields = ['title', 'slug', 'content']

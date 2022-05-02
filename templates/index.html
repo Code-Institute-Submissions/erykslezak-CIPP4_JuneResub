@@ -19,6 +19,7 @@
                     <div class="image-container">
                         <div class="top-card">
                             <p class="author">Posted by {{ post.author }} {{ post.created_on}}</p>
+                            <a href="{% url 'edit_post' post.pk %}">Edit</a>
                         </div>
                     </div>
                     <a href="{% url 'post_detail' post.slug %}" class="post-link">

@@ -8,13 +8,15 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
-class CreatePostForm(forms.ModelForm):
+class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'content', 'status')
+        fields = ('title', 'slug', 'content', 'status')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control',
                                             'placeholder':
-                                            'Choose a blog title!'}),
+                                            'Choose a post title!'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+        
