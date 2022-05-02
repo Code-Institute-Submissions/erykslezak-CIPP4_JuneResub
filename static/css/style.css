@@ -66,11 +66,8 @@ a:hover {
 
 .votes{
     padding-top: 20px;
-}
-
-.votes p{
-    color: #D7DADC;
     text-align: center;
+    color: #D7DADC;
 }
 
 .btn-downvote, .btn-upvote, .btn-comments {

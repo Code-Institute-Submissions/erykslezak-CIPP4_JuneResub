@@ -18,5 +18,3 @@ class AddPostForm(forms.ModelForm):
                                             'Choose a post title!'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
         }
-
-        

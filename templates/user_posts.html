@@ -7,6 +7,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             {% for post in post_list %}
+            {% if user.is_authenticated and user == post.author %}
             <div class="row card" style="max-height: 300px;">
                 <div class="votes col-sm-1">
                     <p>
@@ -31,6 +32,7 @@
                     </a>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

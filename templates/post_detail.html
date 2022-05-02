@@ -16,6 +16,10 @@
                         <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-downvote"><i
                                 class="fas fa-arrow-down"></i></button>
                     </p>
+                    {% if user.is_authenticated and user == post.author %}
+                    <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
+                    <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
+                    {% endif %}
                 </div>
                 <div class="col-sm-11">
                     <div class="image-container">

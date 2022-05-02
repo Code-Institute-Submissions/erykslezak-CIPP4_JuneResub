@@ -37,15 +37,13 @@
                             <li><a href="#">Manage Account</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Log out</a>
+                            <li><a href="{% url 'account_logout' %}">Log out</a>
                             </li>
                         </ul>
                     </li>
                     {% else %}
-                    <li><button type="button" class="btn btn-margin btn-primary">Log In</button>
-                    </li>
-                    <li><button type="button" class="btn btn-margin btn-primary">Sign Up</button>
-                    </li>
+                    <li><a href="{% url 'account_login' %}" class="btn btn-margin btn-primary" style="padding: 6px;">Log In</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="btn btn-margin btn-primary" style="padding: 6px;">Sign Up</a></li>
                     {% endif %}
                 </ul>
                 <form class="navbar-form" id="search" role="search">
@@ -66,9 +64,8 @@
                 <div class="row side-card">
                     <h2>Home</h2>
                     <p>Your personal Reddit frontpage. Come here to check in with your favourite posts.</p>
-                    <a href="{% url 'add_post' %}">
-                        <button type="button" class="btn btn-margin btn-primary">Create Post</button>
-                    </a>
+                    <a href="{% url 'add_post' %}" class="btn btn-margin btn-primary" style="padding: 6px;">Create Post</a>
+                    <a href="{% url 'user_posts' user.username %}" class="btn btn-margin btn-primary" style="padding: 6px;">Your Posts</a>               
                 </div>
             </div>
         </div>
