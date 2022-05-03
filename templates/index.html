@@ -32,14 +32,24 @@
         <p>
             <form action="{% url 'upvote_post_index' %}" method="POST">
                 {% csrf_token %}
+                {% if request.user in post.upvotes.all %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                    class="fas fa-arrow-up" style="color: red;"></i></button>
+                {% else %}
                 <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
                     class="fas fa-arrow-up"></i></button>
+                {% endif %}
             </form>
             <p>{{ post.total_votes }}</p>
             <form action="{% url 'downvote_post_index' %}" method="POST">
                 {% csrf_token %}
+                {% if request.user in post.downvotes.all %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                    class="fas fa-arrow-down" style="color: red;"></i></button>
+                {% else %}
                 <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
                     class="fas fa-arrow-down"></i></button>
+                {% endif %}
             </form>
         </p>
         {% if user.is_authenticated and user == post.author %}
