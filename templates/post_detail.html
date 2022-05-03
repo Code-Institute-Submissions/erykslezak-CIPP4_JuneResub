@@ -49,6 +49,9 @@
                         <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-comments"><i
                                 class="fas fa-message"></i></button>
                     </a>
+                    <br>
+                    <br>
+                    <br>
                     <div>
                         {% if commented %}
                         <div class="alert alert-success" role="alert"></div>
@@ -66,14 +69,20 @@
                     <h3>
                         {% with comments.count as total_comments %}
                         <strong class="text-secondary"><i class="far fa-comments"></i>
-                            <!-- Our total_comments variable goes before the closing strong tag -->
                             {{ total_comments }}</strong>
                         {% endwith %}
-                        Comments:</h3>
+                        Comments:
+                    </h3>
                     <div>
                         {% for comment in comments %}
                         <div class="comments" style="padding: 10px; word-break: break-all;">
                             <p class="font-weight-bold">
+                                {% if user.is_authenticated and user.username == comment.name %}
+                                <a href="#">Edit</a>
+                                <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
+                                {% elif user.is_authenticated and user == post.author %}
+                                <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
+                                {% endif %}
                                 {{ comment.name }}
                                 <span class=" text-muted font-weight-normal">
                                     {{ comment.created_on }}

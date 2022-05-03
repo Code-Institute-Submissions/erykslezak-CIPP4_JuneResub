@@ -1,4 +1,4 @@
-from .models import Post, Tags, UserProfile
+from .models import Post, Tags, UserProfile, Comment
 from .forms import CommentForm, AddPostForm, EditProfileForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -61,6 +61,13 @@ def DownvoteViewIndex(request):
         post.downvotes.add(request.user)
 
     return HttpResponseRedirect(reverse('home'))
+
+
+def DeleteComment(request, slug, comment_post):
+    comment = get_object_or_404(Comment, pk=comment_post)
+    comment.delete()
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class PostList(ListView):

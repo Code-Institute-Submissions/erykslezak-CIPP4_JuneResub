@@ -67,6 +67,12 @@
             <h2 class="card-title">{{ post.title }}</h2>
             <p class="card-content" style="max-height: 150px;">{{ post.content }}</p>
         </a>
+        <h3>
+            {% with post.comments.count as total_comments %}
+            <strong class="text-secondary"><i class="far fa-comments"></i>
+                {{ total_comments }}</strong>
+            {% endwith %}
+        </h3>
     </div>
 </div>
 {% endfor %}
