@@ -29,7 +29,7 @@
     border: solid 1px #343536;
 }
 
-.card, .post-card, .side-card {
+.card, .post-card, .side-card, .normal-card {
     border: solid 1px #343536;
     background-color: #1A1A1B;
     margin-bottom: 10px;
@@ -93,4 +93,9 @@ a:hover {
 
 .card:hover {
     border: solid 1px #D7DADC;
+}
+
+.signup-form {
+    text-align: center;
+    padding-bottom: 20px;
 }

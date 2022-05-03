@@ -57,3 +57,15 @@ class Tags(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user_image = CloudinaryField('image', null=True, blank=True)
+    user_bio = models.TextField()
+
+    def __str__(self):
+        return f"{self.user}"
+
+    def get_absolute_url(self):
+        return reverse('home')
