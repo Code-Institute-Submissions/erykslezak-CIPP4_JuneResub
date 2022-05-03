@@ -34,7 +34,7 @@
                             aria-haspopup="true" aria-expanded="false"><span
                                 class="glyphicon glyphicon-user"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Manage Account</a>
+                            <li><a href="{% url 'edit_profile' user.username %}">Manage Account</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{% url 'account_logout' %}">Log out</a>
