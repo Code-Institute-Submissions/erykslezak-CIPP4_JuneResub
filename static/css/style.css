@@ -99,3 +99,11 @@ a:hover {
     text-align: center;
     padding-bottom: 20px;
 }
+
+.edit-form p{
+    display: inline-flex;
+}
+
+.edit-form input {
+    padding-left: 10px;
+}

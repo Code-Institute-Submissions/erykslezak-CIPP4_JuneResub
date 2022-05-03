@@ -1,5 +1,5 @@
 from .models import Post, Tags, UserProfile
-from .forms import CommentForm, AddPostForm, RegisterForm
+from .forms import CommentForm, AddPostForm, RegisterForm, EditProfileForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -125,9 +125,17 @@ class DeletePost(DeleteView):
 class CreateProfilePageView(CreateView):
     model = UserProfile
     form_class = RegisterForm
-    template_name = 'account/signup.html'
+    template_name = 'accounts/signup.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
+class EditProfileView(UpdateView):
+    form_class = EditProfileForm
+    template_name = 'accounts/edit_profile.html'
+    success_url = reverse_lazy('home')
+
+    def get_object(self):
+        return self.request.user
