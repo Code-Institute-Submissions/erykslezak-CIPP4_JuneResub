@@ -70,6 +70,21 @@ def DeleteComment(request, slug, comment_post):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+def EditComment(request, slug, comment_post):
+    post = get_object_or_404(Post, slug=slug)
+    comment = Comment.objects.get(pk=comment_post)
+    user = request.user
+    comment_form = CommentForm(request.POST, instance=Comment.objects.get(pk=comment_post))
+    if request.method == 'POST':
+        if comment_form.is_valid():
+            comment_form.instance.post = post
+            comment_form.save()
+            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    else:
+        comment_form = CommentForm(instance=Comment.objects.get(pk=comment_post))
+        return render(request, 'edit_comment.html', {'form':comment_form})
+
+
 class PostList(ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')

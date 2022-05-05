@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -13,7 +14,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.IntegerField(choices=STATUS, default=1)
     upvotes = models.ManyToManyField(User, related_name='post_upvotes')
     downvotes = models.ManyToManyField(User, related_name='post_downvotes')
     votes = models.ManyToManyField(User, related_name='post_votes')
@@ -26,6 +27,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def total_votes(self):
         total_upvotes = self.upvotes.count()

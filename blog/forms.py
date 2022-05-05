@@ -20,7 +20,7 @@ class CommentForm(forms.ModelForm):
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'slug', 'post_tag', 'content', 'status')
+        fields = ('title', 'post_tag', 'content', 'status')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Choose a post title'}),
             'post_tag': forms.Select(choices=tags_list, attrs={'class': 'form-control'}),

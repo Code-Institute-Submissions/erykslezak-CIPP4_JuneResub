@@ -45,7 +45,7 @@
                     </div>
                     <a href="{% url 'post_detail' post.slug %}" class="post-link">
                         <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-content">{{ post.content | safe }}}</p>
+                        <p class="card-content">{{ post.content | safe }}</p>
                         <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-comments"><i
                                 class="fas fa-message"></i></button>
                     </a>
@@ -78,7 +78,7 @@
                         <div class="comments" style="padding: 10px; word-break: break-all;">
                             <p class="font-weight-bold">
                                 {% if user.is_authenticated and user.username == comment.name %}
-                                <a href="#">Edit</a>
+                                <a href="{% url 'edit_comment' post.slug comment.id %}">Edit</a>
                                 <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
                                 {% elif user.is_authenticated and user == post.author %}
                                 <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
