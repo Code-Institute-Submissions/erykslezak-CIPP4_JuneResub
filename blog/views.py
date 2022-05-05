@@ -103,6 +103,18 @@ class UserPostList(ListView):
     template_name = 'user_posts.html'
 
 
+class UserDraftList(ListView):
+    model = Post
+    queryset = Post.objects.filter(status=0).order_by('-created_on')
+    template_name = 'user_draft.html'
+
+
+class EditDraft(UpdateView):
+    model = Post
+    template_name = 'edit_draft.html'
+    fields = ['title', 'content', 'status']
+
+
 class PostDetail(DetailView):
 
     def get(self, request, slug, *args, **kwargs):
