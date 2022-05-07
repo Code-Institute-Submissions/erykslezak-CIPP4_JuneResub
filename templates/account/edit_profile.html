@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row normal-card signup-form">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="text-uppercase card-title">Edit your details</h2>
         <div>

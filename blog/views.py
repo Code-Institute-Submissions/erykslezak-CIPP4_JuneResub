@@ -183,10 +183,24 @@ class DeletePost(DeleteView):
     success_url = reverse_lazy('home')
 
 
-class EditProfileView(UpdateView):
-    form_class = EditProfileForm
-    template_name = 'account/edit_profile.html'
-    success_url = reverse_lazy('home')
+# class EditProfileView(UpdateView):
+#     form_class = EditProfileForm
+#     template_name = 'account/edit_profile.html'
+#     success_url = reverse_lazy('home')
 
-    def get_object(self):
-        return self.request.user
+#     def get_object(self):
+#         return self.request.user
+
+
+def EditProfile(request, username):
+    user = request.user
+    edit_profile_form = EditProfileForm(request.POST, instance=user)
+    if request.method == 'POST':
+        if edit_profile_form.is_valid():
+            edit_profile_form.save()
+            return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+        else :
+            return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+    else:
+        edit_profile_form = EditProfileForm(instance=user)
+        return render(request, 'account/edit_profile.html', {'form':edit_profile_form})

@@ -66,8 +66,8 @@ class Tags(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    user_image = CloudinaryField('image', null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    user_image = CloudinaryField('image')
     user_bio = models.TextField()
 
     def __str__(self):

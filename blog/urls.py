@@ -1,13 +1,13 @@
 from . import views
 from django.urls import path
-from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, UpvoteViewIndex, DownvoteViewIndex, EditProfileView, DeleteComment, EditComment, UserDraftList, EditDraft
+from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, UpvoteViewIndex, DownvoteViewIndex, EditProfile, DeleteComment, EditComment, UserDraftList, EditDraft
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('user-posts/<str:username>', views.UserPostList.as_view(), name='user_posts'),
     path('user-draft/<str:username>', views.UserDraftList.as_view(), name='user_drafts'),
     path('edit-draft/<slug:slug>', EditDraft.as_view(), name="edit_draft"),
-    path('account/edit-profile/<str:username>', EditProfileView.as_view(), name="edit_profile"),
+    path('account/edit-profile/<str:username>', EditProfile, name="edit_profile"),
     path('add-post/', AddPost.as_view(), name="add_post"),
     path('edit-post/<slug:slug>', EditPost.as_view(), name="edit_post"),
     path('delete-post/<slug:slug>', DeletePost.as_view(), name="delete_post"),

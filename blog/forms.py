@@ -2,6 +2,7 @@ from .models import Comment, Post, Tags, UserProfile
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
+from cloudinary.forms import CloudinaryFileField
 
 tags = Tags.objects.all().values_list('name', 'name')
 
@@ -28,17 +29,14 @@ class AddPostForm(forms.ModelForm):
         }
 
 
-class EditProfileForm(UserChangeForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    first_name = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    # username = forms.CharField(max_length=40,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    is_superuser = None
-    is_active = None
-    email = None
+class EditProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    user_image = CloudinaryFileField(required=False)
+    user_bio = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = None
 
     class Meta:
-        model = User
-        fields = ('first_name', 'last_name')
+        model = UserProfile
+        fields = ('first_name', 'last_name', 'user_image', 'user_bio')
         # fields = ('username', 'first_name', 'last_name')
