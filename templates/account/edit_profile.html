@@ -6,7 +6,8 @@
         {% csrf_token %}
         <h2 class="text-uppercase card-title">Edit your details</h2>
         <div>
-            {{ form.as_p}}
+            {{ edit_user_form.as_p }}
+            {{ edit_userprofile_form.as_p }}
             <button class="btn btn-lg" type="submit">Edit</button>
         </div>
     </form>

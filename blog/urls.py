@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path
-from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, UpvoteViewIndex, DownvoteViewIndex, EditProfile, DeleteComment, EditComment, UserDraftList, EditDraft
+from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, UpvoteViewIndex, DownvoteViewIndex, EditProfile, DeleteComment, EditComment, UserDraftList, EditDraft, SearchPosts
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('<slug:slug>/<int:comment_post>/delete', DeleteComment, name='delete_comment'),
     path('<slug:slug>/<int:comment_post>/edit', EditComment, name='edit_comment'),
     path('tags/<str:tags>/', TagsView, name="tags"),
+    path('search_posts', views.SearchPosts, name="search_posts"),
     path('upvote/<slug:slug>', UpvoteView, name='upvote_post'),
     path('downvote/<slug:slug>', DownvoteView, name='downvote_post'),
     path('upvote_index/', UpvoteViewIndex, name='upvote_post_index'),

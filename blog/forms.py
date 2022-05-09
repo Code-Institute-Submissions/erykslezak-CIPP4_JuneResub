@@ -29,14 +29,28 @@ class AddPostForm(forms.ModelForm):
         }
 
 
-class EditProfileForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    user_image = CloudinaryFileField(required=False)
-    user_bio = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = None
+# class EditProfileForm(forms.ModelForm):
+#     first_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+#     last_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+#     # user_image = CloudinaryFileField(required=False)
+#     password = None
+
+#     class Meta:
+#         model = UserProfile
+#         fields = ('first_name', 'last_name', 'user_bio')
+
+
+class EditUserProfileForm(forms.ModelForm):
+    # user_image = CloudinaryFileField(required=False)
 
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name', 'user_image', 'user_bio')
-        # fields = ('username', 'first_name', 'last_name')
+        fields = ('user_bio',)
+
+
+class EditUserForm(forms.ModelForm):
+    password = None
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')

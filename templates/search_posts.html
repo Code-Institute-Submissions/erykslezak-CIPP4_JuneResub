@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>You have searched for posts containing {{ searched }}.</h1>
+{% for post in searched_posts %}
+<div class="row card" style="max-height: 300px;">
+    <div class="votes col-sm-1">
+        <p>
+            <form action="{% url 'upvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.upvotes.all %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                    class="fas fa-arrow-up" style="color: red;"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                    class="fas fa-arrow-up"></i></button>
+                {% endif %}
+            </form>
+            <p>{{ post.total_votes }}</p>
+            <form action="{% url 'downvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.downvotes.all %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                    class="fas fa-arrow-down" style="color: red;"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                    class="fas fa-arrow-down"></i></button>
+                {% endif %}
+            </form>
+        </p>
+        {% if user.is_authenticated and user == post.author %}
+        <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
+        <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
+        {% endif %}
+    </div>
+    <div class="col-sm-11">
+        <div class="image-container">
+            <div class="top-card">
+                <p class="author">{{ post.post_tag }} - Posted by {{ post.author }} {{ post.created_on}}</p>
+            </div>
+        </div>
+        <a href="{% url 'post_detail' post.slug %}" class="post-link">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-content" style="max-height: 150px;">{{ post.content }}</p>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+{%endblock%}

@@ -46,9 +46,11 @@
                     <li><a href="{% url 'account_signup' %}" class="btn btn-margin btn-primary" style="padding: 6px;">Sign Up</a></li>
                     {% endif %}
                 </ul>
-                <form class="navbar-form" id="search" role="search">
+                <form class="navbar-form" id="search" method="POST" action="{% url 'search_posts' %}">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        {% csrf_token %}
+                        <input type="search" class="form-control" placeholder="Search Posts" name="searched">
+                        <button type="submit" class="form-control">Search</button>
                     </div>
                 </form>
             </div>

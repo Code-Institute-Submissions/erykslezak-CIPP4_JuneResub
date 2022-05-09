@@ -1,5 +1,5 @@
 from .models import Post, Tags, UserProfile, Comment
-from .forms import CommentForm, AddPostForm, EditProfileForm
+from .forms import CommentForm, AddPostForm, EditUserProfileForm, EditUserForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -192,15 +192,62 @@ class DeletePost(DeleteView):
 #         return self.request.user
 
 
+# def EditProfile(request, username):
+#     user = request.user
+#     profile = get_object_or_404(UserProfile, user=user)
+#     if request.method == 'POST':
+#         edit_profile_form = EditProfileForm(request.POST, request.FILES, instance=profile,
+#         initial={'first_name':user.first_name,'last_name':user.last_name})
+#         if edit_profile_form.is_valid():
+#             print(edit_profile_form)
+#             # new_form = edit_profile_form.save(commit=False)
+#             # new_form.user_bio = request.POST.get('user_bio')
+#             # new_form.save()
+#             edit_profile_form.save()
+#             return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+#         else:
+#             return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+#     else:
+#         edit_profile_form = EditProfileForm(instance=profile,initial={'first_name':user.first_name, 
+#                                                                         'last_name':user.last_name})
+#         return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+
+
 def EditProfile(request, username):
     user = request.user
-    edit_profile_form = EditProfileForm(request.POST, instance=user)
+    profile = get_object_or_404(UserProfile, user=user)
     if request.method == 'POST':
-        if edit_profile_form.is_valid():
-            edit_profile_form.save()
-            return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
-        else :
-            return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+        edit_userprofile_form = EditUserProfileForm(request.POST, request.FILES, instance=profile)
+        edit_user_form = EditUserForm(request.POST, instance=user)
+        if edit_user_form.is_valid() and edit_userprofile_form.is_valid():
+            edit_user_form.save()
+            edit_userprofile_form.save()
+            edit_userprofile_form = EditUserProfileForm(instance=profile)
+            edit_user_form = EditUserForm(instance=user)
+            context = {
+                'edit_userprofile_form': edit_userprofile_form,
+                'edit_user_form': edit_user_form,
+            }
+            return render(request, 'account/edit_profile.html', context)
+        else:
+            context = {
+                'edit_userprofile_form': edit_userprofile_form,
+                'edit_user_form': edit_user_form,
+            }   
     else:
-        edit_profile_form = EditProfileForm(instance=user)
-        return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
+        edit_userprofile_form = EditUserProfileForm(instance=profile)
+        edit_user_form = EditUserForm(instance=user)
+        context = {
+            'edit_userprofile_form': edit_userprofile_form,
+            'edit_user_form': edit_user_form,
+        }
+        return render(request, 'account/edit_profile.html', context)
+
+
+def SearchPosts(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        searched_posts = Post.objects.filter(title__contains=searched)
+        return render(request, 'search_posts.html',{'searched': searched, 'searched_posts': searched_posts})
+    else:
+        return render(request, 'search_posts.html',{})
