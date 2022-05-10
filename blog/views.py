@@ -222,8 +222,6 @@ def EditProfile(request, username):
         if edit_user_form.is_valid() and edit_userprofile_form.is_valid():
             edit_user_form.save()
             edit_userprofile_form.save()
-            edit_userprofile_form = EditUserProfileForm(instance=profile)
-            edit_user_form = EditUserForm(instance=user)
             context = {
                 'edit_userprofile_form': edit_userprofile_form,
                 'edit_user_form': edit_user_form,

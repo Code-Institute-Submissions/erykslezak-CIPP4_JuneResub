@@ -77,7 +77,7 @@
                         {% for comment in comments %}
                         <div class="comments" style="padding: 10px; word-break: break-all;">
                             <p class="font-weight-bold">
-                                <img src="#" class="rounded-circle" width="150", height="150">
+                                <img src="{{ user.user_profile.user_image.url }}" class="rounded-circle" width="50", height="50">
                                 {% if user.is_authenticated and user.username == comment.name %}
                                 <a href="{% url 'edit_comment' post.slug comment.id %}">Edit</a>
                                 <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>

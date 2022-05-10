@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
+from django.db.models.signals import post_save
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -68,10 +69,16 @@ class Tags(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     user_image = CloudinaryField('image', blank=True, null=True)
-    user_bio = models.TextField()
+    user_bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.user}"
 
     def get_absolute_url(self):
         return reverse('home')
+
+
+def user_created_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        UserProfile.objects.get_or_create(user=instance)
+post_save.connect(user_created_receiver, sender=User)
