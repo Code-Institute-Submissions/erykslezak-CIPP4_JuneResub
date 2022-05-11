@@ -1,4 +1,4 @@
-from .models import Post, Tags, UserProfile, Comment
+from .models import Post, Tags, UserProfile, Comment, User
 from .forms import CommentForm, AddPostForm, EditUserProfileForm, EditUserForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -183,36 +183,6 @@ class DeletePost(DeleteView):
     success_url = reverse_lazy('home')
 
 
-# class EditProfileView(UpdateView):
-#     form_class = EditProfileForm
-#     template_name = 'account/edit_profile.html'
-#     success_url = reverse_lazy('home')
-
-#     def get_object(self):
-#         return self.request.user
-
-
-# def EditProfile(request, username):
-#     user = request.user
-#     profile = get_object_or_404(UserProfile, user=user)
-#     if request.method == 'POST':
-#         edit_profile_form = EditProfileForm(request.POST, request.FILES, instance=profile,
-#         initial={'first_name':user.first_name,'last_name':user.last_name})
-#         if edit_profile_form.is_valid():
-#             print(edit_profile_form)
-#             # new_form = edit_profile_form.save(commit=False)
-#             # new_form.user_bio = request.POST.get('user_bio')
-#             # new_form.save()
-#             edit_profile_form.save()
-#             return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
-#         else:
-#             return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
-#     else:
-#         edit_profile_form = EditProfileForm(instance=profile,initial={'first_name':user.first_name, 
-#                                                                         'last_name':user.last_name})
-#         return render(request, 'account/edit_profile.html', {'form':edit_profile_form})
-
-
 def EditProfile(request, username):
     user = request.user
     profile = get_object_or_404(UserProfile, user=user)
@@ -240,6 +210,14 @@ def EditProfile(request, username):
             'edit_user_form': edit_user_form,
         }
         return render(request, 'account/edit_profile.html', context)
+
+
+class ShowProfileView(DetailView):
+    model = User
+    template_name = 'user_profile.html'
+
+    def get_object(self):
+        return get_object_or_404(User, username=self.kwargs.get('username'))
 
 
 def SearchPosts(request):
