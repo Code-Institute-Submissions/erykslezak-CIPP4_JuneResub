@@ -80,5 +80,5 @@ class UserProfile(models.Model):
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created:
-        UserProfile.objects.get_or_create(user=instance)
+        UserProfile.objects.get_or_create(user=instance, user_image='https://res.cloudinary.com/craity/image/upload/v1651927366/CIPP4/default_profile.png')
 post_save.connect(user_created_receiver, sender=User)
