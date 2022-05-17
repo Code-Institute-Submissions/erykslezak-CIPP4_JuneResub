@@ -1,5 +1,5 @@
 from .models import Post, Tags, UserProfile, Comment, User
-from .forms import CommentForm, AddPostForm, EditUserProfileForm, EditUserForm
+from .forms import CommentForm, PostForm, EditUserProfileForm, EditUserForm, EditPostForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -112,7 +112,7 @@ class UserDraftList(ListView):
 class EditDraft(UpdateView):
     model = Post
     template_name = 'edit_draft.html'
-    fields = ['title', 'content', 'status']
+    form_class = PostForm
 
 
 class PostDetail(DetailView):
@@ -165,7 +165,7 @@ class PostDetail(DetailView):
 class AddPost(CreateView):
     model = Post
     template_name = 'add_post.html'
-    form_class = AddPostForm
+    form_class = PostForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -175,7 +175,7 @@ class AddPost(CreateView):
 class EditPost(UpdateView):
     model = Post
     template_name = 'edit_post.html'
-    fields = ['title', 'slug', 'content']
+    form_class = EditPostForm
 
 
 class DeletePost(DeleteView):

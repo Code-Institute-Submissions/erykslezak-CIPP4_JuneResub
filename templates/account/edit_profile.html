@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row normal-card signup-form">
+<div class="row post-card signup-form" style="padding: 1em">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="text-uppercase card-title">Edit your details</h2>

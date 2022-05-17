@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Edit Post</h2>
+<div class="row post-card" style="padding: 1em">
+    {% if user.is_authenticated and user == post.author %}
+    <h2>Edit Post</h2>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>Edit</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Edit</button>
+    </form>
+    {% else %}
+    <h2>Seems like you are trying to edit a post, please log in first.</h2>
+    {% endif %}
+</div>
 {% endblock content %}

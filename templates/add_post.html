@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-<h2>Add Post</h2>
+<div class="row post-card" style="padding: 1em">
+    <h2>Add Post</h2>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>Post</button>
-</form>
-{% else %}
-<h2>Seems like you are trying to make a post, please log in first.</h2>
-{% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Post</button>
+    </form>
+    {% else %}
+    <h2>Seems like you are trying to make a post, please log in first.</h2>
+    {% endif %}
+</div>
 {% endblock content %}

@@ -1,40 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-            {% for post in post_list %}
-            {% if user.is_authenticated and user == post.author %}
-            <div class="row card" style="max-height: 300px;">
-                <div class="votes col-sm-1">
-                    <p>
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-upvote"><i class="fas fa-arrow-up"></i></button>
-                        0
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-downvote"><i class="fas fa-arrow-down"></i></button>
-                    </p>
-                    {% if user.is_authenticated and user == post.author %}
-                    <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
-                    <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
-                    {% endif %}
-                </div>
-                <div class="col-sm-11">
-                    <div class="image-container">
-                        <div class="top-card">
-                            <p class="author">Posted by {{ post.author }} {{ post.created_on}}</p>
-                        </div>
-                    </div>
-                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-content" style="max-height: 150px;">{{ post.content }}</p>
-                    </a>
-                </div>
+{% for post in post_list %}
+{% if user.is_authenticated and user == post.author %}
+<div class="row card" style="max-height: 300px;">
+    <div class="votes col-sm-1">
+        <p>
+            <form action="{% url 'upvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.upvotes.all %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                        class="fas fa-arrow-up vote-status"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                        class="fas fa-arrow-up"></i></button>
+                {% endif %}
+            </form>
+            <p>{{ post.total_votes }}</p>
+            <form action="{% url 'downvote_post_index' %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.downvotes.all %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                        class="fas fa-arrow-down vote-status"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                        class="fas fa-arrow-down"></i></button>
+                {% endif %}
+            </form>
+        </p>
+        {% if user.is_authenticated and user == post.author %}
+        <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
+        <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
+        {% endif %}
+    </div>
+    <div class="col-sm-11">
+        <div class="image-container">
+            <div class="top-card">
+                <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> -
+                    Posted by <a href="{% url 'show_profile' post.author %}">{{ post.author }}</a>
+                    {{ post.created_on}}</p>
             </div>
-            {% endif %}
-            {% endfor %}
         </div>
+        <a href="{% url 'post_detail' post.slug %}" class="post-link">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-content" style="max-height: 150px;">{{ post.content }}</p>
+        </a>
+        <h3>
+            {% with post.comments.count as total_comments %}
+            <strong class="text-secondary"><i class="far fa-comments"></i>
+                {{ total_comments }}</strong>
+            {% endwith %}
+        </h3>
     </div>
 </div>
+{% endif %}
+{% endfor %}
 {%endblock%}

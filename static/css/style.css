@@ -2,17 +2,16 @@
     text-align:center;
 }
 
-/* #search:active {
-    border: solid 1px #D7DADC;
-} */
-
 .form-control{
     background-color: #272729;
     border: solid 1px #343536;
+    color: #CBCEC0;
 }
 
 .form-control:hover,
+.form-control:focus,
 .form-group:visited {
+    box-shadow: none;
     border: solid 1px #D7DADC;
 }
 
@@ -47,21 +46,22 @@
     color: #646566
 }
 
-a, p, h3{
-    color: #D7DADC
+a, p, h3, h2,
+a:hover, a:focus, a:active {
+    color: #D7DADC;
+    text-decoration: none;
 }
 
-a:hover {
-    color: #D7DADC
-}
 .card-title{
-    color: #D7DADC
+    color: #D7DADC;
+    text-decoration: none;
 }
 
 .card-content{
     color: #CBCEC0;
     overflow: hidden;
     margin-bottom: 15px;
+    text-decoration: none;
 }
 
 .votes{
@@ -77,11 +77,17 @@ a:hover {
     background: transparent;
 }
 
-/*.btn-upvote:hover,
-.btn-upvote:active {
-    color: #E84610;
-    border: none;
-} */
+.btn-signup:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+}
+
+.btn-dropdown:hover, .btn-dropdown:active {
+    color: #1A1A1B;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    color: #1A1A1B;
+}
 
 body {
     background-color: #030303;
@@ -106,4 +112,33 @@ a:hover {
 
 .edit-form input {
     padding-left: 10px;
+}
+
+ul.separator {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+  
+ul.separator li {
+    padding: .5em 0;
+    border-bottom: 1px solid #CCC;
+}
+  
+ul.separator li:last-child {
+    border-bottom: 0;
+}
+
+.page-title:hover {
+    color: white;
+}
+
+.vote-status {
+    color: #007BFF;
+}
+
+.user-form {
+    display: block;
+    margin: auto;
+    width: 50%;
 }

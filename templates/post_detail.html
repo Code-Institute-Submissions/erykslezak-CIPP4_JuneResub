@@ -2,99 +2,89 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-            <div class="row post-card">
-                <div class="votes col-sm-1">
-                    <p>
-                        <form action="{% url 'upvote_post' post.slug %}" method="POST">
-                            {% csrf_token %}
-                            {% if request.user in post.upvotes.all %}
-                            <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
-                                class="fas fa-arrow-up" style="color: red;"></i></button>
-                            {% else %}
-                            <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
-                                class="fas fa-arrow-up"></i></button>
-                            {% endif %}
-                        </form>
-                        <p>{{ post.total_votes }}</p>
-                        <form action="{% url 'downvote_post' post.slug %}" method="POST">
-                            {% csrf_token %}
-                            {% if request.user in post.downvotes.all %}
-                            <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
-                                class="fas fa-arrow-down" style="color: red;"></i></button>
-                            {% else %}
-                            <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
-                                class="fas fa-arrow-down"></i></button>
-                            {% endif %}
-                        </form>
-                    </p>
-                    {% if user.is_authenticated and user == post.author %}
-                    <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
-                    <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
-                    {% endif %}
-                </div>
-                <div class="col-sm-11">
-                    <div class="image-container">
-                        <div class="top-card">
-                            <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> - Posted by {{ post.author }} {{ post.created_on}}</p>
-                        </div>
-                    </div>
-                    <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-content">{{ post.content | safe }}</p>
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-comments"><i
-                                class="fas fa-message"></i></button>
-                    </a>
-                    <br>
-                    <br>
-                    <br>
-                    <div>
-                        {% if commented %}
-                        <div class="alert alert-success" role="alert"></div>
-                        {% else %}
-                        {% if user.is_authenticated %}
-                        <p>Comment as: {{ user.username }}</p>
-                        <form method="POST" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-signup btn-lg">Comment</button>
-                        </form>
-                        {% endif %}
-                        {% endif %}
-                    </div>
-                    <h3>
-                        {% with comments.count as total_comments %}
-                        <strong class="text-secondary"><i class="far fa-comments"></i>
-                            {{ total_comments }}</strong>
-                        {% endwith %}
-                        Comments:
-                    </h3>
-                    <div>
-                        {% for comment in comments %}
-                        <div class="comments" style="padding: 10px; word-break: break-all;">
-                            <p class="font-weight-bold">
-                                <img src="{{ comment.user.user_profile.user_image.url }}" class="rounded-circle" width="50", height="50">
-                                {% if user.is_authenticated and user.username == comment.name %}
-                                <a href="{% url 'edit_comment' post.slug comment.id %}">Edit</a>
-                                <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
-                                {% elif user.is_authenticated and user == post.author %}
-                                <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
-                                {% endif %}
-                                {{ comment.name }}
-                                <span class=" text-muted font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            {{ comment.body | linebreaks }}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+<div class="row card">
+    <div class="votes col-sm-1">
+        <p>
+            <form action="{% url 'upvote_post' post.slug %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.upvotes.all %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                    class="fas fa-arrow-up vote-status"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
+                    class="fas fa-arrow-up"></i></button>
+                {% endif %}
+            </form>
+            <p>{{ post.total_votes }}</p>
+            <form action="{% url 'downvote_post' post.slug %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.downvotes.all %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                    class="fas fa-arrow-down vote-status"></i></button>
+                {% else %}
+                <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
+                    class="fas fa-arrow-down"></i></button>
+                {% endif %}
+            </form>
+        </p>
+        {% if user.is_authenticated and user == post.author %}
+        <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
+        <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
+        {% endif %}
+    </div>
+    <div class="col-sm-11">
+        <div class="image-container">
+            <div class="top-card">
+                <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> - Posted by {{ post.author }} {{ post.created_on}}</p>
             </div>
+        </div>
+        <span>
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-content">{{ post.content | safe }}</p>
+        </span>
+        <br>
+        <br>
+        <br>
+        <div>
+            {% if commented %}
+            <div class="alert alert-success" role="alert"></div>
+            {% else %}
+            {% if user.is_authenticated %}
+            <p>Comment as: {{ user.username }}</p>
+            <form method="POST" style="margin-top: 1.3em;">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-signup btn-lg">Comment</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+        <h3>
+            {% with comments.count as total_comments %}
+            <strong class="text-secondary"><i class="far fa-comments"></i>
+                {{ total_comments }}</strong>
+            {% endwith %}
+            Comments:
+        </h3>
+        <div>
+            {% for comment in comments %}
+            <div class="comments" style="padding: 10px; word-break: break-all;">
+                <p class="font-weight-bold">
+                    <img src="{{ comment.user.user_profile.user_image.url }}" style="border-radius: 50%" width="50", height="50">
+                    {% if user.is_authenticated and user.username == comment.name %}
+                    <a href="{% url 'edit_comment' post.slug comment.id %}">Edit</a>
+                    <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
+                    {% elif user.is_authenticated and user == post.author %}
+                    <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
+                    {% endif %}
+                    {{ comment.name }}
+                    <span class=" text-muted font-weight-normal">
+                        {{ comment.created_on }}
+                    </span> wrote:
+                </p>
+                {{ comment.body | linebreaks }}
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

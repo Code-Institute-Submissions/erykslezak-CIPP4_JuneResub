@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row card" style="max-height: 300px;">
+<!-- <div class="row card" style="max-height: 300px;">
     <ul class="nav navbar-nav">
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+        <li class="dropdown"> <a href="#" class="dropdown-toggle btn-dropdown" data-toggle="dropdown" role="button"
                 aria-haspopup="true" aria-expanded="false">Sort By Tags</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu separator">
                 {% for tag in tag_menu %}
                 <li><a href="{% url 'tags' tag %}">{{ tag }}</a></li>
-                <li role="separator" class="divider"></li>
                 {% endfor %}
             </ul>
         </li>
     </ul>
-</div>
+</div> -->
 {% for post in post_list %}
 <div class="row card" style="max-height: 300px;">
     <div class="votes col-sm-1">
@@ -22,7 +21,7 @@
                 {% csrf_token %}
                 {% if request.user in post.upvotes.all %}
                 <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
-                    class="fas fa-arrow-up" style="color: red;"></i></button>
+                    class="fas fa-arrow-up vote-status"></i></button>
                 {% else %}
                 <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
                     class="fas fa-arrow-up"></i></button>
@@ -33,7 +32,7 @@
                 {% csrf_token %}
                 {% if request.user in post.downvotes.all %}
                 <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
-                    class="fas fa-arrow-down" style="color: red;"></i></button>
+                    class="fas fa-arrow-down vote-status"></i></button>
                 {% else %}
                 <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
                     class="fas fa-arrow-down"></i></button>

@@ -18,7 +18,7 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
-class AddPostForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'post_tag', 'content', 'status')
@@ -26,26 +26,29 @@ class AddPostForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Choose a post title'}),
             'post_tag': forms.Select(choices=tags_list, attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
         }
 
 
-# class EditProfileForm(forms.ModelForm):
-#     first_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
-#     last_name = forms.CharField(max_length=100,required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
-#     # user_image = CloudinaryFileField(required=False)
-#     password = None
-
-#     class Meta:
-#         model = UserProfile
-#         fields = ('first_name', 'last_name', 'user_bio')
+class EditPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'post_tag', 'content')
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Choose a post title'}),
+            'post_tag': forms.Select(choices=tags_list, attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
 
 class EditUserProfileForm(forms.ModelForm):
-    # user_image = CloudinaryFileField(required=False)
 
     class Meta:
         model = UserProfile
         fields = ('user_bio', 'user_image')
+        widgets = {
+            'user_bio': forms.Textarea(attrs={'class': 'form-control user-form'}),
+        }
 
 
 class EditUserForm(forms.ModelForm):
@@ -54,3 +57,7 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control user-form'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control user-form'}),
+        }
