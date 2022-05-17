@@ -18,7 +18,6 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=1)
     upvotes = models.ManyToManyField(User, related_name='post_upvotes')
     downvotes = models.ManyToManyField(User, related_name='post_downvotes')
-    votes = models.ManyToManyField(User, related_name='post_votes')
 
     class Meta:
         ordering = ['-created_on']
