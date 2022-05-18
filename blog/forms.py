@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from cloudinary.forms import CloudinaryFileField
+import os
 
 tags = Tags.objects.all().values_list('name', 'name')
 
@@ -42,6 +43,8 @@ class EditPostForm(forms.ModelForm):
 
 
 class EditUserProfileForm(forms.ModelForm):
+    user_image = forms.ImageField(label=('User Image'), required=False, widget=forms.FileInput)
+    remove_image = forms.BooleanField(required=False)
 
     class Meta:
         model = UserProfile
@@ -49,6 +52,18 @@ class EditUserProfileForm(forms.ModelForm):
         widgets = {
             'user_bio': forms.Textarea(attrs={'class': 'form-control user-form'}),
         }
+    
+    def save(self, commit=True):
+        instance = super(EditUserProfileForm, self).save(commit=False)
+        if self.cleaned_data.get('remove_image'):
+            try:
+                os.unlink(instance.user_image.url)
+            except OSError:
+                pass
+            instance.user_image = 'https://res.cloudinary.com/craity/image/upload/v1651927366/CIPP4/default_profile.png'
+        if commit:
+            instance.save()
+        return instance
 
 
 class EditUserForm(forms.ModelForm):
