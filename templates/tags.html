@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Posts with tag of {{ tags }}.</h1>
 {% for post in tag_posts %}
-<div class="row card" style="max-height: 300px;">
+<div class="row card" style="max-height: 100%;">
     <div class="votes col-sm-1">
         <p>
             <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-upvote"><i

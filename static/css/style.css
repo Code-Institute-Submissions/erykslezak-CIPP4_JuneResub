@@ -148,6 +148,10 @@ input[type=file] {
     margin-top: 2em;
 }
 
+.col-sm-1 {
+    float: left;
+}
+
 @media screen and (max-width: 991px) {
     .row-xs {
         display: flex;
@@ -184,5 +188,11 @@ input[type=file] {
 
     p {
         margin: 0.5em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        background-color: white;
     }
 }
