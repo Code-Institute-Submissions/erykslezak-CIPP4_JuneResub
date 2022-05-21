@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path
-from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, UpvoteViewIndex, DownvoteViewIndex, EditProfile, DeleteComment, EditComment, UserDraftList, EditDraft, SearchPosts, ShowProfileView
+from .views import AddPost, PostDetail, EditPost, DeletePost, UserPostList, TagsView, UpvoteView, DownvoteView, EditProfile, DeleteComment, EditComment, UserDraftList, EditDraft, SearchPosts, ShowProfileView
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
@@ -18,7 +18,5 @@ urlpatterns = [
     path('search_posts/', views.SearchPosts, name="search_posts"),
     path('upvote/<slug:slug>', UpvoteView, name='upvote_post'),
     path('downvote/<slug:slug>', DownvoteView, name='downvote_post'),
-    path('upvote_index/', UpvoteViewIndex, name='upvote_post_index'),
-    path('downvote_index/', DownvoteViewIndex, name='downvote_post_index'),
     path('<slug:slug>/', PostDetail.as_view(), name="post_detail"),
 ]

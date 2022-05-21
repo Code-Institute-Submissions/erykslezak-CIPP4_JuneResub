@@ -6,22 +6,22 @@
 <div class="row card" style="max-height: 100%;">
     <div class="votes col-sm-1">
         <p>
-            <form action="{% url 'upvote_post_index' %}" method="POST">
+            <form action="{% url 'upvote_post' post.slug %}" method="POST">
                 {% csrf_token %}
                 {% if request.user in post.upvotes.all %}
                 <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
-                    class="fas fa-arrow-up" style="color: red;"></i></button>
+                    class="fas fa-arrow-up vote-status"></i></button>
                 {% else %}
                 <button type="submit" name="post_id_upvote" value="{{post.id}}" class="btn-upvote"><i
                     class="fas fa-arrow-up"></i></button>
                 {% endif %}
             </form>
             <p>{{ post.total_votes }}</p>
-            <form action="{% url 'downvote_post_index' %}" method="POST">
+            <form action="{% url 'downvote_post' post.slug %}" method="POST">
                 {% csrf_token %}
                 {% if request.user in post.downvotes.all %}
                 <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
-                    class="fas fa-arrow-down" style="color: red;"></i></button>
+                    class="fas fa-arrow-down vote-status"></i></button>
                 {% else %}
                 <button type="submit" name="post_id_downvote" value="{{post.id}}" class="btn-downvote"><i
                     class="fas fa-arrow-down"></i></button>

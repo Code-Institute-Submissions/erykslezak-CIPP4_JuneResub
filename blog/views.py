@@ -1,6 +1,6 @@
 from .models import Post, Tags, UserProfile, Comment, User
 from .forms import CommentForm, PostForm, EditUserProfileForm, EditUserForm, EditPostForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
@@ -21,7 +21,7 @@ def UpvoteView(request, slug):
     else:
         post.upvotes.add(request.user)
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return redirect(request.META['HTTP_REFERER'])
 
 
 def DownvoteView(request, slug):
@@ -34,33 +34,7 @@ def DownvoteView(request, slug):
     else:
         post.downvotes.add(request.user)
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-def UpvoteViewIndex(request):
-    post = get_object_or_404(Post, id=request.POST.get('post_id_upvote'))
-    if post.downvotes.filter(id=request.user.id).exists():
-        post.upvotes.add(request.user)
-        post.downvotes.remove(request.user)
-    elif post.upvotes.filter(id=request.user.id).exists():
-        post.upvotes.remove(request.user)
-    else:
-        post.upvotes.add(request.user)
-
-    return HttpResponseRedirect(reverse('home'))
-
-
-def DownvoteViewIndex(request):
-    post = get_object_or_404(Post, id=request.POST.get('post_id_downvote'))
-    if post.upvotes.filter(id=request.user.id).exists():
-        post.downvotes.add(request.user)
-        post.upvotes.remove(request.user)
-    elif post.downvotes.filter(id=request.user.id).exists():
-        post.downvotes.remove(request.user)
-    else:
-        post.downvotes.add(request.user)
-
-    return HttpResponseRedirect(reverse('home'))
+    return redirect(request.META['HTTP_REFERER'])
 
 
 def DeleteComment(request, slug, comment_post):
