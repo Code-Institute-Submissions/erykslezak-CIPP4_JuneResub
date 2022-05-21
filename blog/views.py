@@ -1,14 +1,17 @@
 from .models import Post, Tags, UserProfile, Comment, User
-from .forms import CommentForm, PostForm, EditUserProfileForm, EditUserForm, EditPostForm
+from .forms import (CommentForm, PostForm, EditUserProfileForm,
+                    EditUserForm, EditPostForm)
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import (CreateView, ListView, DetailView,
+                                  UpdateView, DeleteView)
 
 
 def TagsView(request, tags):
     tag_posts = Post.objects.filter(post_tag=tags.replace('-', ' '))
-    return render(request, 'tags.html', {'tags': tags.title().replace('-', ' '), 'tag_posts': tag_posts})
+    return render(request, 'tags.html', {'tags': tags.title()
+                  .replace('-', ' '), 'tag_posts': tag_posts})
 
 
 def UpvoteView(request, slug):
@@ -48,15 +51,17 @@ def EditComment(request, slug, comment_post):
     post = get_object_or_404(Post, slug=slug)
     comment = Comment.objects.get(pk=comment_post)
     user = request.user
-    comment_form = CommentForm(request.POST, instance=Comment.objects.get(pk=comment_post))
+    comment_form = CommentForm(request.POST,
+                               instance=Comment.objects.get(pk=comment_post))
     if request.method == 'POST':
         if comment_form.is_valid():
             comment_form.instance.post = post
             comment_form.save()
             return HttpResponseRedirect(reverse('post_detail', args=[slug]))
     else:
-        comment_form = CommentForm(instance=Comment.objects.get(pk=comment_post))
-        return render(request, 'edit_comment.html', {'form':comment_form})
+        comment_form = CommentForm(instance=Comment
+                                   .objects.get(pk=comment_post))
+        return render(request, 'edit_comment.html', {'form': comment_form})
 
 
 class PostList(ListView):
@@ -162,7 +167,9 @@ def EditProfile(request, username):
     user = request.user
     profile = get_object_or_404(UserProfile, user=user)
     if request.method == 'POST':
-        edit_userprofile_form = EditUserProfileForm(request.POST, request.FILES, instance=profile)
+        edit_userprofile_form = EditUserProfileForm(request.POST,
+                                                    request.FILES,
+                                                    instance=profile)
         edit_user_form = EditUserForm(request.POST, instance=user)
         if edit_user_form.is_valid() and edit_userprofile_form.is_valid():
             edit_user_form.save()
@@ -176,7 +183,7 @@ def EditProfile(request, username):
             context = {
                 'edit_userprofile_form': edit_userprofile_form,
                 'edit_user_form': edit_user_form,
-            }   
+            }
     else:
         edit_userprofile_form = EditUserProfileForm(instance=profile)
         edit_user_form = EditUserForm(instance=user)
@@ -199,6 +206,7 @@ def SearchPosts(request):
     if request.method == "POST":
         searched = request.POST['searched']
         searched_posts = Post.objects.filter(title__contains=searched)
-        return render(request, 'search_posts.html',{'searched': searched, 'searched_posts': searched_posts})
+        return render(request, 'search_posts.html', {'searched': searched,
+                      'searched_posts': searched_posts})
     else:
-        return render(request, 'search_posts.html',{})
+        return render(request, 'search_posts.html', {})

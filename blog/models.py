@@ -7,11 +7,13 @@ from django.db.models.signals import post_save
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     post_tag = models.CharField(max_length=70, default="Uncategorized")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name="blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -40,13 +42,13 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='user_comment')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
+                             blank=True, related_name='user_comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             related_name='comments')
     name = models.CharField(max_length=80)
-    email = models.EmailField()
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    # approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['created_on']
@@ -66,7 +68,8 @@ class Tags(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                related_name='user_profile')
     user_image = CloudinaryField('image', blank=True, null=True)
     user_bio = models.TextField(blank=True, null=True)
 
@@ -79,5 +82,8 @@ class UserProfile(models.Model):
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created:
-        UserProfile.objects.get_or_create(user=instance, user_image='https://res.cloudinary.com/craity/image/upload/v1651927366/CIPP4/default_profile.png')
+        UserProfile.objects.get_or_create(
+            user=instance,
+            user_image='https://res.cloudinary.com/craity/image/'
+                       'upload/v1651927366/CIPP4/default_profile.png')
 post_save.connect(user_created_receiver, sender=User)

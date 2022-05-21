@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Delete Post</h2>
-<h3>Delete: {{ post.title }}</h3>
-<form method="POST">
-    {% csrf_token %}
-    
-    <button>Delete Post</button>
-</form>
+<div class="row post-card" style="padding: 1em; text-align: center;">
+<!-- Checks if user is logged in and if the post belongs to user -->
+{% if user.is_authenticated and user == post.author %}
+    <h2>Delete Post</h2>
+    <h3>Delete: {{ post.title }}</h3>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <button>Delete Post</button>
+    </form>
+{% else %}
+<!-- If post does not belong to user, notifies them -->
+    <h2>Seems like you are trying to delete a post that is not yours! Please log in first.</h2>
+{% endif %}
+</div>
 {% endblock content %}

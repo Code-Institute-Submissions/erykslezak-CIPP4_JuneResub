@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-
+<!-- Start of searched posts -->
 {% block content %}
 <h2>You have searched for posts containing {{ searched }}.</h2>
+<!-- Start of a loop to list all searched posts -->
 {% for post in searched_posts %}
 <div class="row card" style="max-height: 100%;">
+    <!-- Start of a column with post settings and voting system -->
     <div class="votes col-sm-1">
         <p>
             <form action="{% url 'upvote_post' post.slug %}" method="POST">
@@ -33,6 +35,8 @@
         <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
         {% endif %}
     </div>
+    <!-- End of a column with post settings and voting system -->
+    <!-- Start of the main post preview section -->
     <div class="col-sm-11">
         <div class="image-container">
             <div class="top-card">
@@ -44,7 +48,9 @@
             <p class="card-content" style="max-height: 150px;">{{ post.content }}</p>
         </a>
     </div>
+    <!-- End of the main post preview section -->
 </div>
 {% endfor %}
-
+<!-- End of a loop to list all searched posts -->
 {%endblock%}
+<!-- End of searched posts -->

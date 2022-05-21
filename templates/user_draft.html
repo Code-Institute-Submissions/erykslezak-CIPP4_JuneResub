@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Start of a loop to list all users draft posts -->
 {% for post in post_list %}
+<!-- Start of a check if user is logged in and is the post author -->
 {% if user.is_authenticated and user == post.author %}
 <div class="row card" style="max-height: 100%;">
+    <!-- Start of a column with post settings and voting system -->
     <div class="votes col-sm-1">
         <p>
             <form action="{% url 'upvote_post' post.slug %}" method="POST">
@@ -33,6 +36,8 @@
         <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
         {% endif %}
     </div>
+    <!-- End of a column with post settings and voting system -->
+    <!-- Start of the main post preview section -->
     <div class="col-sm-11">
         <div class="image-container">
             <div class="top-card">
@@ -52,7 +57,10 @@
             {% endwith %}
         </h3>
     </div>
+    <!-- End of the main post preview section -->
 </div>
 {% endif %}
+<!-- End of a check if user is logged in and is the post author -->
 {% endfor %}
+<!-- End of a loop to list all users draft posts -->
 {%endblock%}

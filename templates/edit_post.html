@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row post-card" style="padding: 1em">
-    {% if user.is_authenticated and user == post.author %}
+<!-- Checks if user is logged in and if the post belongs to user -->
+{% if user.is_authenticated and user == post.author %}
     <h2>Edit Post</h2>
 
     <form method="POST">
@@ -9,8 +10,9 @@
         {{ form.as_p }}
         <button>Edit</button>
     </form>
-    {% else %}
-    <h2>Seems like you are trying to edit a post, please log in first.</h2>
-    {% endif %}
+{% else %}
+<!-- If post does not belong to user, notifies them -->
+    <h2>Seems like you are trying to edit a post that is not yours! Please log in first.</h2>
+{% endif %}
 </div>
 {% endblock content %}

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user.is_authenticated %}
+<!-- Checks if user is logged in -->
 <div class="row post-card" style="padding: 1em">
+{% if user.is_authenticated %}
     <h2>Add Post</h2>
-
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button>Post</button>
     </form>
-    {% else %}
+<!-- If user isn't logged in, notifies them -->
+{% else %}
     <h2>Seems like you are trying to make a post, please log in first.</h2>
-    {% endif %}
+{% endif %}
 </div>
 {% endblock content %}

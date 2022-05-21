@@ -24,8 +24,10 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'post_tag', 'content', 'status')
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Choose a post title'}),
-            'post_tag': forms.Select(choices=tags_list, attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control',
+                                     'placeholder': 'Choose a post title'}),
+            'post_tag': forms.Select(choices=tags_list,
+                                     attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
@@ -36,23 +38,27 @@ class EditPostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'post_tag', 'content')
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Choose a post title'}),
-            'post_tag': forms.Select(choices=tags_list, attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control',
+                                     'placeholder': 'Choose a post title'}),
+            'post_tag': forms.Select(choices=tags_list,
+                                     attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 
 class EditUserProfileForm(forms.ModelForm):
-    user_image = forms.ImageField(label=('User Image'), required=False, widget=forms.FileInput)
+    user_image = forms.ImageField(label=('User Image'), required=False,
+                                  widget=forms.FileInput)
     remove_image = forms.BooleanField(required=False)
 
     class Meta:
         model = UserProfile
         fields = ('user_bio', 'user_image')
         widgets = {
-            'user_bio': forms.Textarea(attrs={'class': 'form-control user-form'}),
+            'user_bio': forms.Textarea(attrs={'class':
+                                              'form-control user-form'}),
         }
-    
+
     def save(self, commit=True):
         instance = super(EditUserProfileForm, self).save(commit=False)
         if self.cleaned_data.get('remove_image'):
@@ -60,7 +66,9 @@ class EditUserProfileForm(forms.ModelForm):
                 os.unlink(instance.user_image.url)
             except OSError:
                 pass
-            instance.user_image = 'https://res.cloudinary.com/craity/image/upload/v1651927366/CIPP4/default_profile.png'
+            instance.user_image = ('https://res.cloudinary.com/craity/image/'
+                                   'upload/v1651927366/CIPP4/'
+                                   'default_profile.png')
         if commit:
             instance.save()
         return instance
@@ -73,6 +81,8 @@ class EditUserForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name')
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control user-form'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control user-form'}),
+            'first_name': forms.TextInput(attrs={'class':
+                                                 'form-control user-form'}),
+            'last_name': forms.TextInput(attrs={'class':
+                                                'form-control user-form'}),
         }

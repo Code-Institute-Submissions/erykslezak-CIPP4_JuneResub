@@ -3,6 +3,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <div class="row card">
+    <!-- Start of a column with post settings and voting system -->
     <div class="votes col-sm-1">
         <p>
             <form action="{% url 'upvote_post' post.slug %}" method="POST">
@@ -32,7 +33,10 @@
         <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>
         {% endif %}
     </div>
+    <!-- End of a column with post settings and voting system -->
+    <!-- Start of the main post section -->
     <div class="col-sm-11">
+        <!-- Start of post details -->
         <div class="image-container">
             <div class="top-card">
                 <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> - Posted by {{ post.author }} {{ post.created_on}}</p>
@@ -45,6 +49,8 @@
         <br>
         <br>
         <br>
+        <!-- End of post details -->
+        <!-- Start of comment form and alert -->
         <div>
             {% if commented %}
             <div class="alert alert-success alert-dismissible" role="alert" id="msg">
@@ -64,13 +70,15 @@
             {% endif %}
             {% endif %}
         </div>
+        <!-- End of comment form and alert -->
+        <!-- Start of comment section -->
         <h3>
             {% with comments.count as total_comments %}
             <strong class="text-secondary"><i class="far fa-comments"></i>
                 {{ total_comments }}</strong>
             {% endwith %}
             Comments:
-        </h3>
+        </h3>    
         <div>
             {% for comment in comments %}
             <div class="comments" style="padding: 10px; word-break: break-all;">
@@ -91,6 +99,8 @@
             </div>
             {% endfor %}
         </div>
+        <!-- End of comment section -->
     </div>
+    <!-- End of the main post section -->
 </div>
 {%endblock%}
