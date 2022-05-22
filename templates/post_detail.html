@@ -90,7 +90,7 @@
                     {% elif user.is_authenticated and user == post.author %}
                     <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
                     {% endif %}
-                    {{ comment.name }}
+                    <a href="{% url 'show_profile' comment.user %}">{{ comment.name }}</a>
                     <span class=" text-muted font-weight-normal">
                         {{ comment.created_on }}
                     </span> wrote:

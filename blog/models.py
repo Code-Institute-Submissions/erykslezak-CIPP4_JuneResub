@@ -1,14 +1,21 @@
+'''
+Imports the relevant packages
+'''
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-from cloudinary.models import CloudinaryField
 from django.db.models.signals import post_save
+from cloudinary.models import CloudinaryField
 
+# Status of user posts
 STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Post(models.Model):
+    '''
+    Post model
+    '''
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     post_tag = models.CharField(max_length=70, default="Uncategorized")
@@ -22,6 +29,9 @@ class Post(models.Model):
     downvotes = models.ManyToManyField(User, related_name='post_downvotes')
 
     class Meta:
+        '''
+        Orders the posts by when they were created
+        '''
         ordering = ['-created_on']
 
     def __str__(self):
@@ -42,6 +52,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    '''
+    Comment model
+    '''
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
                              blank=True, related_name='user_comment')
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
@@ -51,6 +64,9 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        '''
+        Orders comments by when they were created
+        '''
         ordering = ['created_on']
 
     def __str__(self):
@@ -58,6 +74,9 @@ class Comment(models.Model):
 
 
 class Tags(models.Model):
+    '''
+    Tags model - Can be also called 'categories'
+    '''
     name = models.CharField(max_length=80)
 
     def __str__(self):
@@ -68,6 +87,9 @@ class Tags(models.Model):
 
 
 class UserProfile(models.Model):
+    '''
+    Extends User model to allow users to have more settings
+    '''
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 related_name='user_profile')
     user_image = CloudinaryField('image', blank=True, null=True)
@@ -80,10 +102,14 @@ class UserProfile(models.Model):
         return reverse('home')
 
 
+# Function which creates UserProfile model for new registrations
+# and sets default user image
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created:
         UserProfile.objects.get_or_create(
             user=instance,
             user_image='https://res.cloudinary.com/craity/image/'
                        'upload/v1651927366/CIPP4/default_profile.png')
+
+
 post_save.connect(user_created_receiver, sender=User)

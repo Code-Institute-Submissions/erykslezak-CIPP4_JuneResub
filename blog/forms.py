@@ -1,3 +1,6 @@
+'''
+Imports the relevant packages
+'''
 from .models import Comment, Post, Tags, UserProfile
 from django import forms
 from django.contrib.auth.models import User
@@ -9,18 +12,31 @@ tags = Tags.objects.all().values_list('name', 'name')
 
 tags_list = []
 
+# A loop that adds new tags to current ones
 for tag in tags:
     tags_list.append(tag)
 
 
 class CommentForm(forms.ModelForm):
+    '''
+    Comment form which consists only of body field.
+    '''
     class Meta:
+        '''
+        Necessary comment fields
+        '''
         model = Comment
         fields = ('body',)
 
 
 class PostForm(forms.ModelForm):
+    '''
+    Add new post form
+    '''
     class Meta:
+        '''
+        Necessary post fields
+        '''
         model = Post
         fields = ('title', 'post_tag', 'content', 'status')
         widgets = {
@@ -34,7 +50,13 @@ class PostForm(forms.ModelForm):
 
 
 class EditPostForm(forms.ModelForm):
+    '''
+    Edit post form
+    '''
     class Meta:
+        '''
+        Necessary fields in order to edit the post
+        '''
         model = Post
         fields = ('title', 'post_tag', 'content')
         widgets = {
@@ -47,11 +69,17 @@ class EditPostForm(forms.ModelForm):
 
 
 class EditUserProfileForm(forms.ModelForm):
+    '''
+    Edit user profile form
+    '''
     user_image = forms.ImageField(label=('User Image'), required=False,
                                   widget=forms.FileInput)
     remove_image = forms.BooleanField(required=False)
 
     class Meta:
+        '''
+        Fields for user to edit as per UserProfile model extension
+        '''
         model = UserProfile
         fields = ('user_bio', 'user_image')
         widgets = {
@@ -59,6 +87,8 @@ class EditUserProfileForm(forms.ModelForm):
                                               'form-control user-form'}),
         }
 
+    # function that lets user 'delete' their current image
+    # and go back to default one
     def save(self, commit=True):
         instance = super(EditUserProfileForm, self).save(commit=False)
         if self.cleaned_data.get('remove_image'):
@@ -75,9 +105,15 @@ class EditUserProfileForm(forms.ModelForm):
 
 
 class EditUserForm(forms.ModelForm):
+    '''
+    Edit user form
+    '''
     password = None
 
     class Meta:
+        '''
+        Fields from the All auth User model
+        '''
         model = User
         fields = ('first_name', 'last_name')
         widgets = {

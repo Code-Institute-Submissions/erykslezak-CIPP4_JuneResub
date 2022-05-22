@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-            <div class="row post-card">
-                <h1>User profile..</h1>
-                {{ user.username }}
-            </div>
-        </div>
+<div class="row post-card" style="padding: 1em; text-align: center;">
+    <div>
+        <h2>The profile of {{ user.username }}.</h2>
+            <p>Username: {{ user.username }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>User Bio: 
+            <br>{{ user.user_profile.user_bio }}</p>
+            <p>User Profile Image: <br><br>
+            <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150", height="150"></p>
     </div>
 </div>
 {%endblock%}
