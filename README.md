@@ -32,9 +32,54 @@
 
 <span id="context"></span>
 
-## Context
+# **Context**
+
+Chatters, a website where you can chat with other people about anything and everything. It is a community platform in the form of a blog where users can
+interact with other users posts and share their opinions. Users can create an account where they can edit their profile image, their bio and other
+settings.
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+# **UX**
+
+<span id="ux-stories"></span>
+
+## **User stories**
+
+- As a **User** I want to be able to browse all posts and sort them by their tags.
+- As a **User** I want to be able to see the amount of votes and comments on each post.
+- As a **User** I want to be able to preview authors profile.
+- As a **User** I want to be able to see the time of the posts and comments.
+- As a **User** I want to be able to comment on posts and have the option to edit or delete them.
+- As a **User** I want to be able to add posts with different tags and get option to publish or draft them.
+- As a **User** I want to be able to react to users posts by upvoting or downvoting them.
+- As a **User** I want to be able to edit my profile and upload an avatar.
+- As a **User** I want to be able to search through all posts.
+
+- As a **Admin** I want to be able to control all of user settings on one page.
 
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
-<span id="ux"></span>
 
+## **Strategy**
+
+<span id="ux-strategy"></span>
+
+### **Site Aims**
+
+My main aim for the website was to let user to be able to save their posts for future reference as well as interacting with other users. I wanted to create a community where people can quickly access any type of topics they are interested in be it gaming or world news.
+
+The website needs to let user to:
+
+- Sort posts to their needs.
+- Create and set up their account.
+- Create posts with either published or draft status.
+- Upvote or downvote each post.
+
+### **Opportunities**
+
+With the user stories in mind, I have made a table below to narrow down and prioritize the scope of intended strategy.
+
+![Oppotunities](docs/opportunities.png)
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
