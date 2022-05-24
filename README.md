@@ -14,6 +14,7 @@
   - <a href="#ux-strategy">Strategy</a>
   - <a href="#ux-scope">Scope</a>
   - <a href="#ux-structure">Structure</a>
+  - <a href="#ux-structure">Wireframes</a>
 - <a href="#features">Features</a>
   - <a href="#features-all">Design</a>
   - <a href="#features-all">Existing Features</a>
@@ -80,6 +81,42 @@ The website needs to let user to:
 
 With the user stories in mind, I have made a table below to narrow down and prioritize the scope of intended strategy.
 
-![Oppotunities](docs/opportunities.png)
+![Opportunities](docs/opportunities.png)
+
+## **Scope**
+
+<span id="ux-scope"></span>
+
+A scope was defined to identify what was needed to be done in order to match the strategy outlined before.
+
+- Content Requirements
+  - The UX must address
+    - A list of posts
+    - Posts being sorted into categories (tags)
+    - A list of users comments on posts
+  - The UX should accommodate
+    - Easy navigation
+    - Ability to vote and comment
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+## **Structure**
+
+<span id="ux-structure"></span>
+
+I've created a flow charts to help me visualize what the navigation should feel like. I have also made one with the database scheme to guide me throughout the site progression.
+
+![Structure](docs/site-structure.png)
+![Database](docs/database.png)
+
+As you can see in aboves images, my database scheme ended up quite accurate but there is one field currently not being used but will be in future implementations. The field I am talking about is in Post model and is **Updated_On**. I have plans to also add one for comments to be able to preview if the post was edited.
+
+## **Wireframes**
+
+<span id="ux-wireframes"></span>
+
+The wireframes were successfully converted into a live functioning website across all devices.
+
+The full suite of wireframes for **desktop**, **tablet** and **mobile** devices, can be accessed [here](wireframes/).
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
