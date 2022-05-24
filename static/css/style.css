@@ -3,7 +3,7 @@
 .form-control{
     background-color: #272729;
     border: solid 1px #343536;
-    color: #CBCEC0;
+    color: #F6F5F4;
 }
 
 .form-control:hover,
@@ -20,6 +20,10 @@
 /* all site */
 #search{
     text-align:center;
+}
+
+* {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -90,7 +94,7 @@ ul.separator li:last-child {
 }
 
 .card-content{
-    color: #CBCEC0;
+    color: #F6F5F4;
     overflow: hidden;
     margin-bottom: 15px;
     text-decoration: none;

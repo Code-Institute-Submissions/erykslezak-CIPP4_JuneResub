@@ -14,7 +14,8 @@
   - <a href="#ux-strategy">Strategy</a>
   - <a href="#ux-scope">Scope</a>
   - <a href="#ux-structure">Structure</a>
-  - <a href="#ux-structure">Wireframes</a>
+  - <a href="#ux-wireframes">Wireframes</a>
+  - <a href="#ux-design">Design</a>
 - <a href="#features">Features</a>
   - <a href="#features-all">Design</a>
   - <a href="#features-all">Existing Features</a>
@@ -118,5 +119,21 @@ As you can see in aboves images, my database scheme ended up quite accurate but 
 The wireframes were successfully converted into a live functioning website across all devices.
 
 The full suite of wireframes for **desktop**, **tablet** and **mobile** devices, can be accessed [here](wireframes/).
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+## **Design**
+
+<span id="ux-design"></span>
+
+### **Colour Scheme**
+
+After looking through different reddits and my preference of all websites I browse, I concluded that the best color scheme would be a simple **Dark Theme**. With plans in feature to implement a switch for light theme I though this can be a good idea. The below is the colours I have used the most.
+
+![Coolors](docs/coolors.png)
+
+### **Typography**
+
+For fonts I decided to go with what reddit is using. The fonts are as follows, Verdana, Arial, Helvetica and Sans-serif. I think it gives site nice and clear look and ease of readability.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
