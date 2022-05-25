@@ -5,10 +5,19 @@
     <div>
         <h2>The profile of {{ user.username }}.</h2>
             <p>Username: {{ user.username }}</p>
+            {% if user.first_name == '' %}
+            {% else %}
             <p>First Name: {{ user.first_name }}</p>
+            {% endif %}
+            {% if user.last_name == '' %}
+            {% else %}
             <p>Last Name: {{ user.last_name }}</p>
+            {% endif %}
+            {% if user.user_profile.user_bio == '' %}
+            {% else %}
             <p>User Bio: 
             <br>{{ user.user_profile.user_bio }}</p>
+            {% endif %}
             <p>User Profile Image: <br><br>
             <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150", height="150"></p>
     </div>

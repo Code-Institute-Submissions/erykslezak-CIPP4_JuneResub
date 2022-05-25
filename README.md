@@ -17,8 +17,8 @@
   - <a href="#ux-wireframes">Wireframes</a>
   - <a href="#ux-design">Design</a>
 - <a href="#features">Features</a>
-  - <a href="#features-all">Design</a>
-  - <a href="#features-all">Existing Features</a>
+  - <a href="#features-design">Design Features</a>
+  - <a href="#features-existing">Existing Features</a>
   - <a href="#features-future">Still to implement</a>
 - <a href="#technologies">Technologies Used</a>
 - <a href="#libraries">Libraries Used</a>
@@ -41,6 +41,8 @@ interact with other users posts and share their opinions. Users can create an ac
 settings.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+<span id="ux"></span>
 
 # **UX**
 
@@ -135,5 +137,69 @@ After looking through different reddits and my preference of all websites I brow
 ### **Typography**
 
 For fonts I decided to go with what reddit is using. The fonts are as follows, Verdana, Arial, Helvetica and Sans-serif. I think it gives site nice and clear look and ease of readability.
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+<span id="features"></span>
+# Features
+
+## Design Features
+
+<span id="features-design"></span>
+
+Every page consits of top navigation bar and a side column with consitent and responsive design.
+- The top navigation bar contains a site name which brings user back to index page. A search bar to search throughout all published posts and account management buttons such as log in, edit account and log out.
+- The side column contains buttons which bring users to their published posts or drafts as well as a button to let them add posts.
+
+## Existing Features
+
+<span id="features-existing"></span>
+
+### **Sitewide**
+
+**Navigation Bar**
+- The navigation bar consists of a search input and button.
+- It also contains of a sign up and log in button if user is not logged in which changes afterwards to an icon which gives the user option of either login out or editing their account.
+
+![Search](docs/features/search.png)
+![Login Register Buttons](docs/features/login-register-account.png)
+![Account Icon](docs/features/manage-account.png)
+
+**Side Column Menu**
+- The side column consists of buttons which let users add posts and view their either published posts or drafts.
+
+![Side Column](docs/features/side-column.png)
+
+### **Index**
+- The index page has a list of posts sorted by date and the option to sort posts by tags to their needs.
+- The post card has options for users if they are the authors as per image. They can delete or edit them.
+- As per options on each post, users can upvote or downvote each post to give visible feedback and the amount of comments are also visible.
+- The post **tag**, the author and the date is given in each post.
+
+![Index Post](docs/features/post.png)
+![Sort Bar](docs/features/sort-bar.png)
+
+### **Post**
+- The post has the same options as stated above in **Index** section.
+- The additional features are the ability for users to comment and preview other users comments.
+- The full post length is also visible in comparison to **Index** view.
+- Add post page contains a simple form layout with necessary fields such as title, tag, content and status.
+- The edit post page has the same form layout as previously mentioned add post page with the fields being pre filled.
+- The author of the post has ability to delete comments.
+
+![Main Post](docs/features/main-post.png)
+![Add Post](docs/features/add-post.png)
+
+### **User Profile**
+- The user can edit their profile fields such as their first and last name, their bio and their image.
+- Users can access other users profile by pressing on their names in either post author and comment name.
+- User profile preview page does not show fields that user has blank in their settings.
+
+![Edit Profile](docs/features/edit-profile.png)
+![User Profile](docs/features/user-profile.png)
+
+### **Other**
+- The users published post and draft sections are comparable to **Index** page. Only difference is they can not sort them by tags as of now.
+- The delete post feature is a simple page with notifying the user before their decision has been made.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
