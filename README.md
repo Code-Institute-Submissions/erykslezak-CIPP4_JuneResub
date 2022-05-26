@@ -21,7 +21,6 @@
   - <a href="#features-existing">Existing Features</a>
   - <a href="#features-future">Still to implement</a>
 - <a href="#technologies">Technologies Used</a>
-- <a href="#libraries">Libraries Used</a>
 - <a href="#testing">Testing</a>
   - <a href="#testing-manual">User Stories</a>
   - <a href="#testing-manual">Manual</a>
@@ -203,3 +202,61 @@ Every page consits of top navigation bar and a side column with consitent and re
 - The delete post feature is a simple page with notifying the user before their decision has been made.
 
 <div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+## **Features still to implement**
+
+<span id="features-future"></span>
+
+- The ability to edit your own passwords within user settings page.
+- The option to upload images into posts and comments and to be able to customize your posts more.
+- Add more sorting options such as sort by amount of votes or the amount of comments.
+- Add a 'light theme' styling as a button to switch in between.
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+# Technologies
+
+<span id="technologies"></span>
+
+### **Main Languages Used**
+- HTML5
+- CSS
+- Python
+
+### **Frameworks, Libraries and Programs Used**
+- Django
+- Bootstrap
+- Cloudinary
+- Crispy Forms
+- GitHub
+- GitPod
+
+<div align="right"><a style="text-align:right" href="#top">Go to index :arrow_double_up:</a></div>
+
+# Testing
+
+## User Stories
+
+- As a **User** I want to be able to browse all posts and sort them by their tags.
+  - The first thing you see are all posts sorted by the date. There is a button on top of page which gives the option to sort throughout the specific tags.
+- As a **User** I want to be able to see the amount of votes and comments on each post.
+  - On each post card there is a column on left side which shows the exact amount of votes. There is an icon and amount of comments on each post card also with the comments being only visible on the actual post link.
+- As a **User** I want to be able to preview authors profile.
+  - Users profile can be accessed by either pressing on the name in comment section or the post author.
+- As a **User** I want to be able to see the time of the posts and comments.
+  - 
+
+
+
+
+
+
+
+
+- As a **User** I want to be able to comment on posts and have the option to edit or delete them.
+- As a **User** I want to be able to add posts with different tags and get option to publish or draft them.
+- As a **User** I want to be able to react to users posts by upvoting or downvoting them.
+- As a **User** I want to be able to edit my profile and upload an avatar.
+- As a **User** I want to be able to search through all posts.
+
+- As a **Admin** I want to be able to control all of user settings on one page.
