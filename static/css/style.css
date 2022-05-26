@@ -1,22 +1,3 @@
-
-
-.form-control{
-    background-color: #272729;
-    border: solid 1px #343536;
-    color: #F6F5F4;
-}
-
-.form-control:hover,
-.form-control:focus,
-.form-group:visited {
-    box-shadow: none;
-    border: solid 1px #D7DADC;
-}
-
-.btn-margin{
-    margin: 8px;
-}
-
 /* all site */
 #search{
     text-align:center;
@@ -136,6 +117,11 @@ ul.separator li:last-child {
     color: #1A1A1B;
 }
 
+.btn-margin{
+    margin: 8px;
+}
+
+
 /* forms */
 .signup-form {
     text-align: center;
@@ -159,6 +145,19 @@ ul.separator li:last-child {
 input[type=file] {
     display: inline;
     margin-top: 2em;
+}
+
+.form-control{
+    background-color: #272729;
+    border: solid 1px #343536;
+    color: #F6F5F4;
+}
+
+.form-control:hover,
+.form-control:focus,
+.form-group:visited {
+    box-shadow: none;
+    border: solid 1px #D7DADC;
 }
 
 /* responsive */
