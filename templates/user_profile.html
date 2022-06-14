@@ -19,7 +19,7 @@
             <br>{{ user.user_profile.user_bio }}</p>
             {% endif %}
             <p>User Profile Image: <br><br>
-            <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150" height="150" alt="Your profile image"></p>
+            <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150" height="150" alt="{{ user.username }}'s profile image"></p>
     </div>
 </div>
 {%endblock%}

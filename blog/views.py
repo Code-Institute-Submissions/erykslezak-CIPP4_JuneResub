@@ -252,7 +252,7 @@ def search_posts(request):
     '''
     if request.method == "POST":
         searched = request.POST['searched']
-        searched_posts = Post.objects.filter(title__contains=searched)
+        searched_posts = Post.objects.filter(title__icontains=searched)
         return render(request, 'search_posts.html', {'searched': searched,
                       'searched_posts': searched_posts})
     else:

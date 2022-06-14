@@ -11,7 +11,7 @@
             {{ edit_userprofile_form.user_bio }}
             <br>
             <p style="font-weight: 700;">User Profile:</p>
-            <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150", height="150">
+            <img src="{{ user.user_profile.user_image.url }}" style="border-radius: 50%"  width="150" height="150" alt="Your profile image">
             <p>{{ edit_userprofile_form.user_image }}</p>
             <p>Remove: {{ edit_userprofile_form.remove_image }}</p>
             <button class="btn btn-lg" type="submit">Edit</button>
