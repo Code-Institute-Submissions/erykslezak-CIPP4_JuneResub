@@ -76,15 +76,15 @@
                     <p>Your personal Reddit frontpage. Come here to check in with your favourite posts.</p>
                     {% if user.is_authenticated %}
                     <a href="{% url 'add_post' %}" class="btn btn-margin btn-primary" style="padding: 6px;">Create Post</a>
-                    <li class="dropdown btn btn-margin btn-primary"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">Your Posts</span></a>
+                    <nav class="dropdown btn btn-margin btn-primary"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">Your Posts</a>
                         <ul class="dropdown-menu separator">
                             <li><a href="{% url 'user_posts' user.username %}">Published</a>
                             </li>
                             <li><a href="{% url 'user_drafts' user.username %}">Drafts</a>
                             </li>
                         </ul>
-                    </li>
+                    </nav>
                     {% endif %}
                 </div>
             </div>

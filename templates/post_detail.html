@@ -5,7 +5,7 @@
 <div class="row card">
     <!-- Start of a column with post settings and voting system -->
     <div class="votes col-sm-1">
-        <p>
+        <div>
             <form action="{% url 'upvote_post' post.slug %}" method="POST">
                 {% csrf_token %}
                 {% if request.user in post.upvotes.all %}
@@ -16,7 +16,7 @@
                     class="fas fa-arrow-up"></i></button>
                 {% endif %}
             </form>
-            <p>{{ post.total_votes }}</p>
+            {{ post.total_votes }}
             <form action="{% url 'downvote_post' post.slug %}" method="POST">
                 {% csrf_token %}
                 {% if request.user in post.downvotes.all %}
@@ -27,7 +27,7 @@
                     class="fas fa-arrow-down"></i></button>
                 {% endif %}
             </form>
-        </p>
+        </div>
         {% if user.is_authenticated and user == post.author %}
         <h5><a href="{% url 'edit_post' post.slug %}">Edit</a></h5>
         <h5><a href="{% url 'delete_post' post.slug %}">Delete</a></h5>

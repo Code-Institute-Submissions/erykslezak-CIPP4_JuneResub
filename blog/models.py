@@ -11,14 +11,13 @@ from cloudinary.models import CloudinaryField
 # Status of user posts
 STATUS = ((0, "Draft"), (1, "Published"))
 
-
 class Post(models.Model):
     '''
     Post model
     '''
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    post_tag = models.CharField(max_length=70, default="Uncategorized")
+    post_tag = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name="blog_posts")
     updated_on = models.DateTimeField(auto_now=True)
