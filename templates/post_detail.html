@@ -42,10 +42,8 @@
                 <p class="author"><a href="{% url 'tags' post.post_tag|slugify %}">{{ post.post_tag }}</a> - Posted by {{ post.author }} {{ post.created_on}}</p>
             </div>
         </div>
-        <span>
-            <h2 class="card-title">{{ post.title }}</h2>
-            <p class="card-content">{{ post.content | safe }}</p>
-        </span>
+        <h2 class="card-title">{{ post.title }}</h2>      
+        <p class="card-content">{{ post.content | safe }}</p>
         <br>
         <br>
         <br>
@@ -83,7 +81,7 @@
             {% for comment in comments %}
             <div class="comments" style="padding: 10px; word-break: break-all;">
                 <p class="font-weight-bold">
-                    <img src="{{ comment.user.user_profile.user_image.url }}" style="border-radius: 50%" width="50", height="50">
+                    <img src="{{ comment.user.user_profile.user_image.url }}" style="border-radius: 50%" width="50" height="50" alt="user profile image">
                     {% if user.is_authenticated and user.username == comment.name %}
                     <a href="{% url 'edit_comment' post.slug comment.id %}">Edit</a>
                     <a href="{% url 'delete_comment' post.slug comment.id %}">Delete</a>
